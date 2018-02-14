@@ -1,38 +1,169 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+	integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+</head>
 <body>
-<h1 th:text="#{label.form.title}">form</h1>
-<form action="/" th:object="${user}" method="POST" enctype="utf8">
-    <div>
-        <label th:text="#{label.user.firstName}">first</label>
-        <input th:field="*{firstName}"/>
-        <p th:each="error: ${#fields.errors('firstName')}"
-          th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.lastName}">last</label>
-        <input th:field="*{lastName}"/>
-        <p th:each="error : ${#fields.errors('lastName')}"
-          th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.email}">email</label>
-        <input type="email" th:field="*{email}"/>
-        <p th:each="error : ${#fields.errors('email')}"
-          th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.password}">password</label>
-        <input type="password" th:field="*{password}"/>
-        <p th:each="error : ${#fields.errors('password')}"
-          th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.confirmPass}">confirm</label>
-        <input type="password" th:field="*{matchingPassword}"/>
-    </div>
-    <button type="submit" th:text="#{label.form.submit}">submit</button>
-</form>
- 
-<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+
+	<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+	<div class="container">
+		<form class="form-horizontal" role="form" method="POST" action="/registrationsubmit"
+			th:object="${user}" enctype="utf8">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<h2 th:text="#{label.form.title}">form</h2>
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="firstname"
+							th:text="#{label.user.firstName}">First Name</label>
+						<span class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon" style="width: 2.6rem">
+								<i class="fa fa-at"></i>
+							</div>
+							<input th:field="*{firstName}" type="text" name="firstname"
+								class="form-control" id="firstname" placeholder="First Name"
+								required="true" autofocus="true" />
+						</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-control-feedback">
+						<span class="text-danger align-middle"> <i
+							class="fa fa-close"></i>
+							<p th:each="error: ${#fields.errors('firstName')}"
+								th:text="${error}">Validation error</p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="lastname"
+							th:text="#{label.user.lastName}">Last Name</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon" style="width: 2.6rem">
+								<i class="fa fa-at"></i>
+							</div>
+							<input th:field="*{lastName}" type="text" name="lastname"
+								class="form-control" id="lastname" placeholder="Last Name"
+								required="true" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-control-feedback">
+						<span class="text-danger align-middle"> <i
+							class="fa fa-close"></i>
+							<p th:each="error: ${#fields.errors('lastName')}"
+								th:text="${error}">Validation error</p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="email" th:text="#{label.user.email}">E-Mail</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon" style="width: 2.6rem">
+								<i class="fa fa-at"></i>
+							</div>
+							<input th:field="*{email}" type="email" name="email"
+								class="form-control" id="email" placeholder="E-Mail"
+								required="true" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-control-feedback">
+						<span class="text-danger align-middle"> <i
+							class="fa fa-close"></i>
+							<p th:each="error: ${#fields.errors('email')}" th:text="${error}">Validation
+								error</p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="password"
+							th:text="#{label.user.password}">Password</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon" style="width: 2.6rem">
+								<i class="fa fa-at"></i>
+							</div>
+							<input th:field="*{password}" type="password" name="password"
+								class="form-control" id="password" placeholder="Password"
+								required="true" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-control-feedback">
+						<span class="text-danger align-middle"> <i
+							class="fa fa-close"></i>
+							<p th:each="error: ${#fields.errors('password')}"
+								th:text="${error}">Validation error</p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="matchingPassword"
+							th:text="#{label.user.confirmPass}">Confirm Password</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon" style="width: 2.6rem">
+								<i class="fa fa-at"></i>
+							</div>
+							<input th:field="*{matchingPassword}" type="password"
+								name="matchingPassword" class="form-control" id="password"
+								placeholder="Confirm Password" required="true" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-top: 1rem">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<button type="submit" class="btn btn-success"
+						th:text="#{label.form.submit}">
+						<i class="fa fa-sign-in"></i> Login
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
